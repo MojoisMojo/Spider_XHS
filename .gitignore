@@ -28,4 +28,8 @@ venv/
 ENV/
 env.bak/
 venv.bak/
+.env
+package-lock.json
+datas/
+*.zip
 

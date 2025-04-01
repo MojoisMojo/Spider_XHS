@@ -98,7 +98,7 @@ class Data_Spider():
                     note_url = f"https://www.xiaohongshu.com/explore/{note['id']}?xsec_token={note['xsec_token']}"
                     note_list.append(note_url)
             if save_choice == 'all' or save_choice == 'excel':
-                excel_name = query
+                if excel_name is None or excel_name == "": excel_name = query
             self.spider_some_note(note_list, cookies_str, base_path, save_choice, excel_name, proxies)
         except Exception as e:
             success = False
@@ -115,19 +115,22 @@ if __name__ == '__main__':
     data_spider = Data_Spider()
     # save_choice: all: 保存所有的信息, media: 保存视频和图片, excel: 保存到excel
     # save_choice 为 excel 或者 all 时，excel_name 不能为空
-    # 1
-    notes = [
-        r'https://www.xiaohongshu.com/explore/67d7c713000000000900e391?xsec_token=AB1ACxbo5cevHxV_bWibTmK8R1DDz0NnAW1PbFZLABXtE=&xsec_source=pc_user',
-    ]
-    data_spider.spider_some_note(notes, cookies_str, base_path, 'all', 'test')
+    # # 1
+    # notes = [
+    #     r'https://www.xiaohongshu.com/explore/67d7c713000000000900e391?xsec_token=AB1ACxbo5cevHxV_bWibTmK8R1DDz0NnAW1PbFZLABXtE=&xsec_source=pc_user',
+    # ]
+    # data_spider.spider_some_note(notes, cookies_str, base_path, 'all', 'test')
 
-    # 2
-    user_url = 'https://www.xiaohongshu.com/user/profile/67a332a2000000000d008358?xsec_token=ABTf9yz4cLHhTycIlksF0jOi1yIZgfcaQ6IXNNGdKJ8xg=&xsec_source=pc_feed'
-    data_spider.spider_user_all_note(user_url, cookies_str, base_path, 'all')
+    # # 2
+    # user_url = 'https://www.xiaohongshu.com/user/profile/67a332a2000000000d008358?xsec_token=ABTf9yz4cLHhTycIlksF0jOi1yIZgfcaQ6IXNNGdKJ8xg=&xsec_source=pc_feed'
+    # data_spider.spider_user_all_note(user_url, cookies_str, base_path, 'all')
 
     # 3
-    query = "榴莲"
-    query_num = 10
-    sort = "general"
-    note_type = 0
-    data_spider.spider_some_search_note(query, query_num, cookies_str, base_path, 'all', sort, note_type)
+    query = "南京大学苏州校区参观攻略"
+    query_num = 100
+    sort = "popularity_descending"
+    note_type = 2
+    data_spider.spider_some_search_note(
+        query, query_num, cookies_str, base_path, 'all', sort, note_type,
+        excel_name=f'{query}_{query_num}_{sort}_{note_type}',
+    )
