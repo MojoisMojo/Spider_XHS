@@ -125,12 +125,14 @@ if __name__ == '__main__':
     # user_url = 'https://www.xiaohongshu.com/user/profile/67a332a2000000000d008358?xsec_token=ABTf9yz4cLHhTycIlksF0jOi1yIZgfcaQ6IXNNGdKJ8xg=&xsec_source=pc_feed'
     # data_spider.spider_user_all_note(user_url, cookies_str, base_path, 'all')
 
+    import time
     # 3
-    query = "南京大学苏州校区参观攻略"
-    query_num = 100
+    query = "南京大学苏州校区交通"
+    query_num = 10
     sort = "popularity_descending"
     note_type = 2
+    time_stamp = time.time()
     data_spider.spider_some_search_note(
         query, query_num, cookies_str, base_path, 'all', sort, note_type,
-        excel_name=f'{query}_{query_num}_{sort}_{note_type}',
+        excel_name=f'{query}_{query_num}_{sort}_{note_type}_{time_stamp}',
     )
